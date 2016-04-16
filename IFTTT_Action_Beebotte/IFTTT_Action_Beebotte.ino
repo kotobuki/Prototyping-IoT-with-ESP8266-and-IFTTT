@@ -11,54 +11,17 @@
 
 #include "config.h"
 
-// Your client ID
-const char clientID[] = "ESP8266";
+// Constants
+const char clientID[] = "ESP8266";  // Your client ID
+const char host[] = "mqtt.beebotte.com";  // The Beebotte server
 
-// The Beebotte server
-const char host[] = "mqtt.beebotte.com";
-
-// Edit for your application
-void messageReceived(const String message) {
-  // Do something with the string
-  // e.g.
-  // if (message.equals("Something")) {
-  //
-  // }
-  // if (message.startsWith("Something")) {
-  //
-  // }
-  // See also
-  // https://www.arduino.cc/en/Tutorial/StringComparisonOperators
-}
-
-// Handle a received message
-void callback(char* topic, byte* payload, unsigned int length) {
-  // A buffer to receive a message
-  char buffer[MQTT_MAX_PACKET_SIZE];
-
-  snprintf(buffer, sizeof(buffer), "%s", payload);
-  Serial.println("received:");
-  Serial.print("topic: ");
-  Serial.println(topic);
-  Serial.println(buffer);
-
-  // Decode the received message in JSON format
-  StaticJsonBuffer<MQTT_MAX_PACKET_SIZE> jsonBuffer;
-  JsonObject& root = jsonBuffer.parseObject(buffer);
-
-  if (!root.success()) {
-    Serial.println("parseObject() failed");
-    return;
-  }
-
-  const char* parsedPayload = root["data"];
-  if (parsedPayload != NULL) {
-    messageReceived(String(parsedPayload));
-  }
-}
-
+// Variables
 WiFiClient wifiClient;
 PubSubClient client(host, 1883, wifiClient);
+
+// Function prototypes
+void messageReceived(const String message);
+void callback(char* topic, byte* payload, unsigned int length);
 
 void setup() {
   Serial.begin(115200);
@@ -140,6 +103,46 @@ void loop() {
     // to process incoming messages
     // and maintain its connection to the server
     client.loop();
+  }
+}
+
+// Edit for your application
+void messageReceived(const String message) {
+  // Do something with the string
+  // e.g.
+  // if (message.equals("Something")) {
+  //
+  // }
+  // if (message.startsWith("Something")) {
+  //
+  // }
+  // See also
+  // https://www.arduino.cc/en/Tutorial/StringComparisonOperators
+}
+
+// Handle a received message
+void callback(char* topic, byte* payload, unsigned int length) {
+  // A buffer to receive a message
+  char buffer[MQTT_MAX_PACKET_SIZE];
+
+  snprintf(buffer, sizeof(buffer), "%s", payload);
+  Serial.println("received:");
+  Serial.print("topic: ");
+  Serial.println(topic);
+  Serial.println(buffer);
+
+  // Decode the received message in JSON format
+  StaticJsonBuffer<MQTT_MAX_PACKET_SIZE> jsonBuffer;
+  JsonObject& root = jsonBuffer.parseObject(buffer);
+
+  if (!root.success()) {
+    Serial.println("parseObject() failed");
+    return;
+  }
+
+  const char* parsedPayload = root["data"];
+  if (parsedPayload != NULL) {
+    messageReceived(String(parsedPayload));
   }
 }
 

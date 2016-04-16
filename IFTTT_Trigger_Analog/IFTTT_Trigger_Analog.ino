@@ -12,47 +12,10 @@ const int buttonPin = 4;
 
 // Variables
 WiFiClientSecure client;
-
 int lastState = -1;
 
-void sendWebRequest() {
-  Serial.print("connecting to ");
-  Serial.println(host);
-
-  if (!client.connect(host, httpsPort)) {
-    Serial.println("connection failed");
-    return;
-  }
-
-  // Make a URL
-  // maker.ifttt.com/trigger/{event}/with/key/{key}
-  String url = "/trigger/";
-  url += event;
-  url += "/with/key/";
-  url += key;
-
-  Serial.print("requesting URL: ");
-  Serial.println(url);
-
-  // Send a web request
-  client.print(String("GET ") + url + " HTTP/1.1\r\n" +
-               "Host: " + host + "\r\n" +
-               "Connection: close\r\n\r\n");
-
-  while (client.connected()) {
-    String line = client.readStringUntil('\n');
-    if (line == "\r") {
-      // Finished reading a header
-      break;
-    }
-  }
-
-  String line = client.readStringUntil('\n');
-  Serial.print("reply: ");
-  Serial.println(line);
-  Serial.println("closing connection");
-  Serial.println();
-}
+// Function prototypes
+void sendWebRequest(void);
 
 void setup() {
   // Initialize the button pin as an input
@@ -98,5 +61,44 @@ void loop() {
   }
 
   lastState = state;
+}
+
+void sendWebRequest() {
+  Serial.print("connecting to ");
+  Serial.println(host);
+
+  if (!client.connect(host, httpsPort)) {
+    Serial.println("connection failed");
+    return;
+  }
+
+  // Make a URL
+  // maker.ifttt.com/trigger/{event}/with/key/{key}
+  String url = "/trigger/";
+  url += event;
+  url += "/with/key/";
+  url += key;
+
+  Serial.print("requesting URL: ");
+  Serial.println(url);
+
+  // Send a web request
+  client.print(String("GET ") + url + " HTTP/1.1\r\n" +
+               "Host: " + host + "\r\n" +
+               "Connection: close\r\n\r\n");
+
+  while (client.connected()) {
+    String line = client.readStringUntil('\n');
+    if (line == "\r") {
+      // Finished reading a header
+      break;
+    }
+  }
+
+  String line = client.readStringUntil('\n');
+  Serial.print("reply: ");
+  Serial.println(line);
+  Serial.println("closing connection");
+  Serial.println();
 }
 
