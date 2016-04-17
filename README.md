@@ -1,5 +1,14 @@
 # Prototyping IoT with ESP8266 and IFTTT
 
+## Required Materials
+
+* A ESP8266 development board (e.g. [SparkFun ESP8266 Thing - Dev Board](https://www.sparkfun.com/products/13711))
+* A USB cable (A to Micro B)
+* A breadboard
+* Jumper wires
+* A tactile switch
+* A 10k Ohm resistor
+
 ## Setting up Your ESP8266 Board
 
 1. Solder headers to your board
@@ -41,13 +50,14 @@
 
 ## Example of ESP8266 as a Trigger Device
 
-1. Point your web browser to https://ifttt.com/maker to connect the Maker channel to your account
-2. Copy your key and paste it to your notebook
-3. Create a recipe; choose the Maker channel for the trigger and choose something (e.g. IF Notifications) for the action
-4. Connect a button and a resistor to the D4 pin of your board
+1. Connect a tactile switch and a 10k Ohm resistor to the ESP8266 board with jumper wires as shown in the diagram ![layout.png](IFTTT_Trigger/layout.png)
+2. Point your web browser to https://ifttt.com/maker to connect the Maker channel to your account
+3. Copy your key and paste it to your notebook
+4. Create a recipe; choose the Maker channel for the trigger and choose something (e.g. IF Notifications) for the action
+5. Connect a button and a resistor to the D4 pin of your board
 Open IFTTT_Trigger
-5. Navigate to a tab named 'config.h' and replace the SSID, password and key with your's
-6. Upload the example to the board, hit the button and see what happens
+6. Navigate to a tab named 'config.h' and replace the SSID, password and key with your's
+7. Upload the example to the board, hit the button and see what happens
 
 ## Example of ESP8266 as an Action Device
 
@@ -62,8 +72,8 @@ Open IFTTT_Trigger
 
 ## Let’s Try!
 
-* Create an example to fire a trigger when your indoor brightness changes (e.g. from bright to dark); How might we convert the voltage range from 0 - 3.3V to 0 - 1V, to fit the range of the analog input pin of your board?
-* Write a code to move a servo motor when something happened (e.g. a person posted a Tweet); How might we connect a servo motor to your board and control it?
+* Create an example to fire a trigger when your indoor brightness changes (e.g. from bright to dark); How might we convert the voltage range from 0 - 3.3V to 0 - 1V, to fit the range of the analog input pin of your board? (see IFTTT_Trigger_Analog)
+* Write a code to move a servo motor when something happened (e.g. a person posted a Tweet); How might we connect a servo motor to your board and control it? (see layout.png in the IFTTT_Action_Beebotte folder)
 
 ## Resources
 
