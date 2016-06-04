@@ -78,11 +78,11 @@ Open IFTTT_Trigger
 ## Resources
 
 * [IoT Workshop in Macao](http://www.slideshare.net/kotobuki/iot-workshop-in-macao-60515896) (slides prepared for the worksop at the Macao Polytechnic Institute on 5th and 6th April, 2016)
-* [ESP8266 Thing Development Board Hookup Guide]( https://learn.sparkfun.com/tutorials/esp8266-thing-development-board-hookup-guide)
-* [MQTT (MQ Telemetry Transport)]( http://mqtt.org/)
-* [Arduino Client for MQTT]( http://pubsubclient.knolleary.net/)
+* [ESP8266 Thing Development Board Hookup Guide](https://learn.sparkfun.com/tutorials/esp8266-thing-development-board-hookup-guide)
+* [MQTT (MQ Telemetry Transport)](http://mqtt.org/)
+* [Arduino Client for MQTT](http://pubsubclient.knolleary.net/)
 
 ## Related Toolkits
 
-* [Blynk]( http://www.blynk.cc/)
-* [Node-RED]( http://nodered.org/)
+* [Blynk](http://www.blynk.cc/)
+* [Node-RED](http://nodered.org/)
